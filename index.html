@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Contador</title>
+</head>
+
+<body>
+
+    <h1 class="titulo">CRONÔMETRO</h1>
+
+    <h1 class="number">0</h1>
+    <button class="btn" onclick="stop()">Stop</button>
+    <button class="btn" onclick="start()">Start</button>
+    <!-- NOVO BOTÃO AQUI -->
+    <button class="btn" onclick="reset()">Zerar</button>
+</body>
+
+<script>
+    let number = 0; // O contador do cronômetro
+    let cron;       // Variável para armazenar o ID do setInterval
+    const h1 = document.querySelector('.number'); // Usamos 'const' para elementos que não mudam
+
+    function start() {
+        // Se o cronômetro já estiver rodando, não faz nada para evitar múltiplos timers
+        if (cron) {
+            return;
+        }
+        cron = setInterval(function () {
+            number++;
+            h1.innerHTML = number;
+        }, 1000); // 1000 milissegundos = 1 segundo
+    }
+
+    function stop() {
+        clearInterval(cron); // Para o cronômetro
+        cron = null; // Limpa a referência para que 'start' possa ser chamado novamente
+    }
+
+    // NOVA FUNÇÃO PARA ZERAR
+    function reset() {
+        clearInterval(cron); // Primeiro, paramos o cronômetro, caso esteja rodando
+        cron = null;         // Limpa a referência
+        number = 0;          // Redefine o contador para zero
+        h1.innerHTML = number; // Atualiza o display para mostrar zero
+    }
+
+</script>
+
+</html>
